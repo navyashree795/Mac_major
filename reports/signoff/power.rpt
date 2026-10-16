@@ -1,0 +1,49 @@
+OpenSTA 2.0.17 GITDIR-NOT Copyright (c) 2019, Parallax Software, Inc.
+License GPLv3: GNU GPL version 3 <http://gnu.org/licenses/gpl.html>
+
+This is free software, and you are free to change and redistribute it
+under certain conditions; type `show_copying' for details. 
+This program comes with ABSOLUTELY NO WARRANTY; for details type `show_warranty'.
+OpenSTA> read_liberty lib/NangateOpenCellLibrary_typical.lib
+OpenSTA> read_verilog netlist/mac_reconfigurable_synth.v
+OpenSTA> link_design  mac_reconfigurable_top
+OpenSTA> read_sdc     scripts/constraints.sdc
+Warning: constraints.sdc, 10 port 'clk_en*' not found.
+Warning: constraints.sdc, 10 port 'acc_en*' not found.
+Warning: constraints.sdc, 10 port 'valid_in*' not found.
+Warning: constraints.sdc, 10 port 'signed_mode*' not found.
+Warning: constraints.sdc, 10 port 'a*' not found.
+Warning: constraints.sdc, 10 port 'b*' not found.
+Warning: constraints.sdc, 10 port 'acc_in*' not found.
+Warning: constraints.sdc, 11 port 'result*' not found.
+Warning: constraints.sdc, 11 port 'result_low*' not found.
+Warning: constraints.sdc, 11 port 'result_high*' not found.
+Warning: constraints.sdc, 11 port 'overflow*' not found.
+OpenSTA> 
+OpenSTA> puts "============================================================"
+============================================================
+OpenSTA> puts "  POWER ESTIMATION REPORT"
+  POWER ESTIMATION REPORT
+OpenSTA> puts "  Design  : mac_reconfigurable_top  |  NanGate 45nm"
+  Design  : mac_reconfigurable_top  |  NanGate 45nm
+OpenSTA> puts "  Voltage : 1.1V  |  Activity: default (0.5 toggle rate)"
+  Voltage : 1.1V  |  Activity: default (0.5 toggle rate)
+OpenSTA> puts "============================================================"
+============================================================
+OpenSTA> puts ""
+
+OpenSTA> report_power
+Group                  Internal  Switching    Leakage      Total
+                          Power      Power      Power      Power
+----------------------------------------------------------------
+Sequential             1.41e-03   1.42e-04   1.72e-05   1.57e-03  59.3%
+Combinational          6.55e-04   2.69e-04   1.53e-04   1.08e-03  40.7%
+Macro                  0.00e+00   0.00e+00   0.00e+00   0.00e+00   0.0%
+Pad                    0.00e+00   0.00e+00   0.00e+00   0.00e+00   0.0%
+----------------------------------------------------------------
+Total                  2.07e-03   4.11e-04   1.70e-04   2.65e-03 100.0%
+                          78.1%      15.5%       6.4%
+OpenSTA> puts "============================================================"
+============================================================
+OpenSTA> 
+OpenSTA> Saving command history

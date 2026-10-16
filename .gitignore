@@ -1,0 +1,12 @@
+# Simulation binaries & waves
+*.vvp
+*.vcd
+
+# Tool logs and history
+.history_sta
+*.log
+
+# Python / IDE cache
+__pycache__/
+.vscode/
+.idea/

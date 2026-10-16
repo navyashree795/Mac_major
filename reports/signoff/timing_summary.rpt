@@ -1,0 +1,29 @@
+============================================================
+  TIMING SUMMARY REPORT (RECONFIGURABLE MAC vs BASE MAC)
+  Process: NanGate 45nm  |  Target Period: 2.000 ns (500 MHz)
+============================================================
+
+--- Reconfigurable Dual-Mode MAC (mac_reconfigurable_top) ---
+OpenSTA> puts "  Worst Negative Slack (WNS):"
+  Worst Negative Slack (WNS):
+OpenSTA> report_worst_slack
+worst slack -0.43
+OpenSTA> report_tns
+tns -2.44
+OpenSTA> puts "------------------------------------------------------------"
+------------------------------------------------------------
+OpenSTA> 
+OpenSTA> Saving command history
+
+--- Base MAC Unit (mac_base_top - Tung & Huang 2020) ---
+OpenSTA> puts "  Worst Negative Slack (WNS):"
+  Worst Negative Slack (WNS):
+OpenSTA> report_worst_slack
+worst slack -0.30
+OpenSTA> report_tns
+tns -1.55
+OpenSTA> puts "------------------------------------------------------------"
+------------------------------------------------------------
+OpenSTA> 
+OpenSTA> Saving command history
+============================================================

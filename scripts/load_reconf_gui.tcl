@@ -1,0 +1,3 @@
+read_lef lib/NangateOpenCellLibrary.tech.lef
+read_lef lib/NangateOpenCellLibrary.macro.lef
+read_def results/mac_reconfigurable_top_routed.def

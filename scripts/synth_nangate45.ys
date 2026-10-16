@@ -1,0 +1,60 @@
+# =============================================================================
+# Yosys Native Synthesis Script: MAC Units on Nangate 45nm OpenCell Library
+# Generates gate-level netlists and full standard cell area/timing reports.
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# 1. Synthesize Base MAC Unit (Tung & Huang IEEE Access 2020)
+# -----------------------------------------------------------------------------
+echo on
+
+read_verilog -sv rtl/core/full_adder.v
+read_verilog -sv rtl/core/half_adder.v
+read_verilog -sv rtl/core/compressor_4_2.v
+read_verilog -sv rtl/core/carry_counter_overflow.v
+read_verilog -sv rtl/core/han_carlson_adder.v
+read_verilog -sv rtl/top/mac_base_top.v
+
+# High-level synthesis with flattening for clean STA netlist
+synth -top mac_base_top -flatten
+
+# Standard cell mapping to Nangate 45nm
+dfflibmap -liberty lib/NangateOpenCellLibrary_typical.lib
+abc -liberty lib/NangateOpenCellLibrary_typical.lib
+hilomap -hicell LOGIC1_X1 Z -locell LOGIC0_X1 Z
+clean
+
+# Print cell count and area statistics
+stat -liberty lib/NangateOpenCellLibrary_typical.lib
+
+# Write gate-level Verilog netlist
+write_verilog -noattr netlist/mac_base_synth.v
+
+# -----------------------------------------------------------------------------
+# 2. Synthesize Reconfigurable Dual-Mode MAC Unit (Upgraded Architecture)
+# -----------------------------------------------------------------------------
+design -reset
+
+read_verilog -sv rtl/core/full_adder.v
+read_verilog -sv rtl/core/half_adder.v
+read_verilog -sv rtl/core/compressor_4_2.v
+read_verilog -sv rtl/core/booth_radix4_encoder.v
+read_verilog -sv rtl/core/booth_radix4_selector.v
+read_verilog -sv rtl/core/carry_counter_overflow.v
+read_verilog -sv rtl/core/han_carlson_adder.v
+read_verilog -sv rtl/top/mac_reconfigurable_top.v
+
+# High-level synthesis with flattening for clean STA netlist
+synth -top mac_reconfigurable_top -flatten
+
+# Standard cell mapping to Nangate 45nm
+dfflibmap -liberty lib/NangateOpenCellLibrary_typical.lib
+abc -liberty lib/NangateOpenCellLibrary_typical.lib
+hilomap -hicell LOGIC1_X1 Z -locell LOGIC0_X1 Z
+clean
+
+# Print cell count and area statistics
+stat -liberty lib/NangateOpenCellLibrary_typical.lib
+
+# Write gate-level Verilog netlist
+write_verilog -noattr netlist/mac_reconfigurable_synth.v

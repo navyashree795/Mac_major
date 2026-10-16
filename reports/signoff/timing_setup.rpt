@@ -1,0 +1,225 @@
+OpenSTA 2.0.17 GITDIR-NOT Copyright (c) 2019, Parallax Software, Inc.
+License GPLv3: GNU GPL version 3 <http://gnu.org/licenses/gpl.html>
+
+This is free software, and you are free to change and redistribute it
+under certain conditions; type `show_copying' for details. 
+This program comes with ABSOLUTELY NO WARRANTY; for details type `show_warranty'.
+OpenSTA> read_liberty lib/NangateOpenCellLibrary_typical.lib
+OpenSTA> read_verilog netlist/mac_reconfigurable_synth.v
+OpenSTA> link_design  mac_reconfigurable_top
+OpenSTA> read_sdc     scripts/constraints.sdc
+Warning: constraints.sdc, 10 port 'clk_en*' not found.
+Warning: constraints.sdc, 10 port 'acc_en*' not found.
+Warning: constraints.sdc, 10 port 'valid_in*' not found.
+Warning: constraints.sdc, 10 port 'signed_mode*' not found.
+Warning: constraints.sdc, 10 port 'a*' not found.
+Warning: constraints.sdc, 10 port 'b*' not found.
+Warning: constraints.sdc, 10 port 'acc_in*' not found.
+Warning: constraints.sdc, 11 port 'result*' not found.
+Warning: constraints.sdc, 11 port 'result_low*' not found.
+Warning: constraints.sdc, 11 port 'result_high*' not found.
+Warning: constraints.sdc, 11 port 'overflow*' not found.
+OpenSTA> 
+OpenSTA> puts "============================================================"
+============================================================
+OpenSTA> puts "  SETUP TIMING REPORT (MAX PATH DELAY)"
+  SETUP TIMING REPORT (MAX PATH DELAY)
+OpenSTA> puts "  Design: mac_reconfigurable_top  |  Clock: 500 MHz (2.000 ns)"
+  Design: mac_reconfigurable_top  |  Clock: 500 MHz (2.000 ns)
+OpenSTA> puts "============================================================"
+============================================================
+OpenSTA> puts ""
+
+OpenSTA> report_checks -path_delay max -format full_clock_expanded -fields {slew cap input_pins nets} -digits 4
+Startpoint: rst_n (input port clocked by clk)
+Endpoint: _12081_ (recovery check against rising-edge clock clk)
+Path Group: **async_default**
+Path Type: max
+
+Fanout       Cap      Slew     Delay      Time   Description
+------------------------------------------------------------------------------------
+                   0.0000    0.0000    0.0000   clock clk (rise edge)
+                             0.0000    0.0000   clock network delay (ideal)
+                             0.2000    0.2000 ^ input external delay
+                   0.0000    0.0000    0.2000 ^ rst_n (in)
+  199  524.6333                                 rst_n (net)
+                   0.0000    0.0000    0.2000 ^ _12081_/SN (DFFS_X1)
+                                       0.2000   data arrival time
+
+                   0.0000    2.0000    2.0000   clock clk (rise edge)
+                             0.0000    2.0000   clock network delay (ideal)
+                            -0.0500    1.9500   clock uncertainty
+                             0.0000    1.9500   clock reconvergence pessimism
+                                       1.9500 ^ _12081_/CK (DFFS_X1)
+                             0.0421    1.9921   library recovery time
+                                       1.9921   data required time
+------------------------------------------------------------------------------------
+                                       1.9921   data required time
+                                      -0.2000   data arrival time
+------------------------------------------------------------------------------------
+                                       1.7921   slack (MET)
+
+
+Startpoint: _12052_ (rising edge-triggered flip-flop clocked by clk)
+Endpoint: _12174_ (rising edge-triggered flip-flop clocked by clk)
+Path Group: clk
+Path Type: max
+
+Fanout       Cap      Slew     Delay      Time   Description
+------------------------------------------------------------------------------------
+                   0.0000    0.0000    0.0000   clock clk (rise edge)
+                             0.0000    0.0000   clock network delay (ideal)
+                   0.0000    0.0000    0.0000 ^ _12052_/CK (DFFR_X1)
+                   0.1672    0.2653    0.2653 ^ _12052_/Q (DFFR_X1)
+   33   71.9014                                 reg_y[3] (net)
+                   0.1672    0.0000    0.2653 ^ _08189_/A1 (NAND2_X1)
+                   0.0697    0.1007    0.3660 v _08189_/ZN (NAND2_X1)
+   10   21.4151                                 _01805_ (net)
+                   0.0697    0.0000    0.3660 v _09879_/A1 (OR4_X1)
+                   0.0285    0.1356    0.5016 v _09879_/ZN (OR4_X1)
+    6   11.0989                                 _03495_ (net)
+                   0.0285    0.0000    0.5016 v _09882_/A2 (AND3_X1)
+                   0.0080    0.0456    0.5472 v _09882_/ZN (AND3_X1)
+    2    3.0327                                 _03498_ (net)
+                   0.0080    0.0000    0.5472 v _09914_/A1 (OR3_X1)
+                   0.0196    0.0792    0.6264 v _09914_/ZN (OR3_X1)
+    4    7.4507                                 _03530_ (net)
+                   0.0196    0.0000    0.6265 v _09918_/A1 (AND3_X1)
+                   0.0144    0.0480    0.6745 v _09918_/ZN (AND3_X1)
+    5    8.8713                                 _03534_ (net)
+                   0.0144    0.0000    0.6745 v _09948_/A1 (OR3_X1)
+                   0.0144    0.0705    0.7450 v _09948_/ZN (OR3_X1)
+    2    2.9749                                 _03564_ (net)
+                   0.0144    0.0000    0.7450 v _09956_/A1 (AND3_X1)
+                   0.0144    0.0455    0.7905 v _09956_/ZN (AND3_X1)
+    5    8.8713                                 _03572_ (net)
+                   0.0144    0.0000    0.7905 v _09988_/A1 (OR3_X1)
+                   0.0144    0.0705    0.8610 v _09988_/ZN (OR3_X1)
+    2    2.9749                                 _03604_ (net)
+                   0.0144    0.0000    0.8610 v _09991_/A1 (AND3_X1)
+                   0.0120    0.0427    0.9037 v _09991_/ZN (AND3_X1)
+    4    6.9339                                 _03607_ (net)
+                   0.0120    0.0000    0.9037 v _09992_/A2 (NOR2_X1)
+                   0.0256    0.0405    0.9442 ^ _09992_/ZN (NOR2_X1)
+    2    3.8784                                 _03608_ (net)
+                   0.0256    0.0000    0.9443 ^ _09995_/A (XNOR2_X1)
+                   0.0321    0.0499    0.9941 ^ _09995_/ZN (XNOR2_X1)
+    2    4.5930                                 _03611_ (net)
+                   0.0321    0.0000    0.9941 ^ _10059_/B1 (OAI21_X1)
+                   0.0175    0.0267    1.0209 v _10059_/ZN (OAI21_X1)
+    2    4.4769                                 _03675_ (net)
+                   0.0175    0.0000    1.0209 v _10060_/B2 (AOI21_X1)
+                   0.0351    0.0491    1.0700 ^ _10060_/ZN (AOI21_X1)
+    2    4.5937                                 _03676_ (net)
+                   0.0351    0.0000    1.0700 ^ _10063_/B1 (OAI21_X1)
+                   0.0163    0.0275    1.0976 v _10063_/ZN (OAI21_X1)
+    2    4.4769                                 _03679_ (net)
+                   0.0163    0.0000    1.0976 v _10064_/B2 (AOI21_X1)
+                   0.0413    0.0555    1.1530 ^ _10064_/ZN (AOI21_X1)
+    3    5.9373                                 _03680_ (net)
+                   0.0413    0.0000    1.1530 ^ _10065_/B2 (OAI21_X1)
+                   0.0188    0.0327    1.1857 v _10065_/ZN (OAI21_X1)
+    2    4.4769                                 _03681_ (net)
+                   0.0188    0.0000    1.1857 v _10066_/B2 (AOI21_X1)
+                   0.0353    0.0500    1.2357 ^ _10066_/ZN (AOI21_X1)
+    2    4.6343                                 _03682_ (net)
+                   0.0353    0.0000    1.2357 ^ _10067_/B2 (OAI21_X1)
+                   0.0196    0.0337    1.2694 v _10067_/ZN (OAI21_X1)
+    3    5.5615                                 _03683_ (net)
+                   0.0196    0.0000    1.2694 v _10068_/B2 (AOI21_X1)
+                   0.0363    0.0514    1.3208 ^ _10068_/ZN (AOI21_X1)
+    2    4.8444                                 _03684_ (net)
+                   0.0363    0.0000    1.3209 ^ _10069_/B2 (OAI21_X1)
+                   0.0203    0.0360    1.3568 v _10069_/ZN (OAI21_X1)
+    3    6.2972                                 _03685_ (net)
+                   0.0203    0.0000    1.3568 v _10071_/C2 (AOI211_X1)
+                   0.0530    0.0671    1.4240 ^ _10071_/ZN (AOI211_X1)
+    2    3.9317                                 _03687_ (net)
+                   0.0530    0.0000    1.4240 ^ _10074_/B3 (OAI33_X1)
+                   0.0211    0.0451    1.4690 v _10074_/ZN (OAI33_X1)
+    2    4.3269                                 _03690_ (net)
+                   0.0211    0.0000    1.4690 v _10075_/B1 (AOI21_X1)
+                   0.0431    0.0547    1.5237 ^ _10075_/ZN (AOI21_X1)
+    3    6.3241                                 _03691_ (net)
+                   0.0431    0.0000    1.5237 ^ _10080_/B1 (OAI21_X1)
+                   0.0152    0.0203    1.5441 v _10080_/ZN (OAI21_X1)
+    1    1.7974                                 _03696_ (net)
+                   0.0152    0.0000    1.5441 v _10084_/A4 (NAND4_X1)
+                   0.0194    0.0321    1.5762 ^ _10084_/ZN (NAND4_X1)
+    2    4.0552                                 _03700_ (net)
+                   0.0194    0.0000    1.5762 ^ _10086_/C2 (AOI211_X1)
+                   0.0148    0.0231    1.5993 v _10086_/ZN (AOI211_X1)
+    2    3.8131                                 _03702_ (net)
+                   0.0148    0.0000    1.5994 v _10088_/B3 (OAI33_X1)
+                   0.0966    0.1241    1.7235 ^ _10088_/ZN (OAI33_X1)
+    3    6.8167                                 _03704_ (net)
+                   0.0966    0.0000    1.7235 ^ _10090_/C2 (OAI211_X1)
+                   0.0312    0.0431    1.7666 v _10090_/ZN (OAI211_X1)
+    2    2.4492                                 _03706_ (net)
+                   0.0312    0.0000    1.7666 v _10095_/A4 (AND4_X1)
+                   0.0086    0.0534    1.8200 v _10095_/ZN (AND4_X1)
+    2    3.1530                                 _03711_ (net)
+                   0.0086    0.0000    1.8200 v _10096_/B2 (OAI21_X1)
+                   0.0451    0.0610    1.8810 ^ _10096_/ZN (OAI21_X1)
+    4    7.4784                                 _03712_ (net)
+                   0.0451    0.0000    1.8811 ^ _10103_/A2 (AND3_X1)
+                   0.0094    0.0514    1.9324 ^ _10103_/ZN (AND3_X1)
+    1    1.2313                                 _03719_ (net)
+                   0.0094    0.0000    1.9325 ^ _10104_/A3 (OR3_X1)
+                   0.0308    0.0326    1.9650 ^ _10104_/ZN (OR3_X1)
+    2    4.0134                                 _03720_ (net)
+                   0.0308    0.0000    1.9651 ^ _10109_/A3 (NAND3_X1)
+                   0.0248    0.0413    2.0064 v _10109_/ZN (NAND3_X1)
+    4    7.1563                                 _03725_ (net)
+                   0.0248    0.0000    2.0064 v _10142_/B2 (OAI21_X1)
+                   0.0359    0.0567    2.0631 ^ _10142_/ZN (OAI21_X1)
+    3    5.4035                                 _03756_ (net)
+                   0.0359    0.0000    2.0631 ^ _10149_/B2 (AOI21_X1)
+                   0.0194    0.0303    2.0935 v _10149_/ZN (AOI21_X1)
+    3    5.6471                                 _03762_ (net)
+                   0.0194    0.0000    2.0935 v _10160_/B2 (OAI21_X1)
+                   0.0356    0.0547    2.1482 ^ _10160_/ZN (OAI21_X1)
+    3    5.4061                                 _03772_ (net)
+                   0.0356    0.0000    2.1482 ^ _10176_/C2 (AOI211_X1)
+                   0.0191    0.0314    2.1797 v _10176_/ZN (AOI211_X1)
+    3    5.7094                                 _03786_ (net)
+                   0.0191    0.0000    2.1797 v _10182_/B3 (OAI33_X1)
+                   0.0691    0.0976    2.2773 ^ _10182_/ZN (OAI33_X1)
+    2    3.2790                                 _03791_ (net)
+                   0.0691    0.0000    2.2773 ^ _10185_/B1 (OAI21_X1)
+                   0.0574    0.0216    2.2988 v _10185_/ZN (OAI21_X1)
+    1    1.8681                                 _03794_ (net)
+                   0.0574    0.0000    2.2988 v _10186_/B2 (OAI21_X1)
+                   0.0222    0.0460    2.3449 ^ _10186_/ZN (OAI21_X1)
+    1    1.4380                                 _00178_ (net)
+                   0.0222    0.0000    2.3449 ^ _12174_/D (DFFR_X1)
+                                       2.3449   data arrival time
+
+                   0.0000    2.0000    2.0000   clock clk (rise edge)
+                             0.0000    2.0000   clock network delay (ideal)
+                            -0.0500    1.9500   clock uncertainty
+                             0.0000    1.9500   clock reconvergence pessimism
+                                       1.9500 ^ _12174_/CK (DFFR_X1)
+                            -0.0367    1.9133   library setup time
+                                       1.9133   data required time
+------------------------------------------------------------------------------------
+                                       1.9133   data required time
+                                      -2.3449   data arrival time
+------------------------------------------------------------------------------------
+                                      -0.4316   slack (VIOLATED)
+
+
+OpenSTA> puts ""
+
+OpenSTA> puts "------------------------------------------------------------"
+------------------------------------------------------------
+OpenSTA> puts "  Worst Negative Slack (WNS):"
+  Worst Negative Slack (WNS):
+OpenSTA> report_worst_slack
+worst slack -0.43
+OpenSTA> report_tns
+tns -2.44
+OpenSTA> puts "------------------------------------------------------------"
+------------------------------------------------------------
+OpenSTA> 
+OpenSTA> Saving command history
