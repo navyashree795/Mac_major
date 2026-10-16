@@ -1,0 +1,58 @@
+[*]
+[*] GTKWave Analyzer Configuration - Base 16-bit MAC Verification
+[*]
+[dumpfile] "mac_base_tb.vcd"
+[savefile] "mac_base_tb.gtkw"
+[timestart] 0
+*-15.000000 15000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb_mac_base.
+[treeopen] tb_mac_base.uut.
+[sst_width] 220
+[signals_width] 250
+[sst_expanded] 1
+[sst_vpaned_height] 220
+@c00028
+-========================================
+- CLOCK, RESET & CONTROL
+-========================================
+@28
+tb_mac_base.clk
+tb_mac_base.rst_n
+tb_mac_base.clr
+tb_mac_base.en
+tb_mac_base.is_signed
+tb_mac_base.last_cycle
+tb_mac_base.valid_out
+@c00028
+-========================================
+- INPUT OPERANDS (HEX & DEC)
+-========================================
+@22
+tb_mac_base.in_x[15:0]
+tb_mac_base.in_y[15:0]
+@24
+tb_mac_base.in_x[15:0]
+tb_mac_base.in_y[15:0]
+@c00028
+-========================================
+- INTERNAL ACCUMULATOR & PIPELINE
+-========================================
+@22
+tb_mac_base.uut.mult_product_unsigned[31:0]
+tb_mac_base.uut.mult_product_signed[31:0]
+tb_mac_base.uut.reg1_lower[14:0]
+tb_mac_base.uut.reg1_upper[15:0]
+tb_mac_base.uut.reg4[7:0]
+tb_mac_base.uut.stage2_sum[24:0]
+@c00028
+-========================================
+- OUTPUTS & GOLDEN COMPARISON
+-========================================
+@22
+tb_mac_base.mac_out[39:0]
+tb_mac_base.expected_acc[39:0]
+@24
+tb_mac_base.tests_passed[31:0]
+tb_mac_base.errors[31:0]
+[pattern_trace] 1
+[pattern_trace] 0

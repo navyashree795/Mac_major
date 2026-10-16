@@ -1,0 +1,76 @@
+[*]
+[*] GTKWave Analyzer Configuration - Reconfigurable Dual-Mode MAC Verification
+[*]
+[dumpfile] "mac_reconfigurable_tb.vcd"
+[savefile] "mac_reconfigurable_tb.gtkw"
+[timestart] 0
+*-15.000000 20000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] tb_mac_reconfigurable.
+[treeopen] tb_mac_reconfigurable.uut.
+[sst_width] 225
+[signals_width] 270
+[sst_expanded] 1
+[sst_vpaned_height] 230
+@c00028
+-========================================
+- CLOCK, RESET & RECONFIGURABLE CONTROL
+-========================================
+@28
+tb_mac_reconfigurable.clk
+tb_mac_reconfigurable.rst_n
+tb_mac_reconfigurable.clr
+tb_mac_reconfigurable.en
+tb_mac_reconfigurable.mode_16b
+tb_mac_reconfigurable.is_signed
+tb_mac_reconfigurable.last_cycle
+tb_mac_reconfigurable.valid_out
+@c00028
+-========================================
+- INPUT OPERANDS (HEX & DEC)
+-========================================
+@22
+tb_mac_reconfigurable.in_x[15:0]
+tb_mac_reconfigurable.in_y[15:0]
+@24
+tb_mac_reconfigurable.in_x[15:0]
+tb_mac_reconfigurable.in_y[15:0]
+@c00028
+-========================================
+- [MODE 1] 16-BIT HIGH-PRECISION MAC
+-========================================
+@22
+tb_mac_reconfigurable.mac_out_16b[39:0]
+tb_mac_reconfigurable.expected_16b[39:0]
+tb_mac_reconfigurable.uut.mult_16b_unsigned[31:0]
+tb_mac_reconfigurable.uut.mult_16b_signed[31:0]
+@c00028
+-========================================
+- [MODE 0] DUAL 8-BIT SIMD (2x SPEED)
+-========================================
+@22
+tb_mac_reconfigurable.mac_out_8b_hi[19:0]
+tb_mac_reconfigurable.expected_8b_hi[19:0]
+tb_mac_reconfigurable.mac_out_8b_lo[19:0]
+tb_mac_reconfigurable.expected_8b_lo[19:0]
+tb_mac_reconfigurable.uut.prod_8b_hi[15:0]
+tb_mac_reconfigurable.uut.prod_8b_lo[15:0]
+tb_mac_reconfigurable.uut.acc_8b_hi_reg[19:0]
+tb_mac_reconfigurable.uut.acc_8b_lo_reg[19:0]
+@c00028
+-========================================
+- INTERNAL PIPELINE & HAN-CARLSON ADDER
+-========================================
+@22
+tb_mac_reconfigurable.uut.reg1_lower[14:0]
+tb_mac_reconfigurable.uut.reg1_upper[15:0]
+tb_mac_reconfigurable.uut.reg4[7:0]
+tb_mac_reconfigurable.uut.stage2_sum[24:0]
+@c00028
+-========================================
+- VERIFICATION SCOREBOARD
+-========================================
+@24
+tb_mac_reconfigurable.tests_passed[31:0]
+tb_mac_reconfigurable.errors[31:0]
+[pattern_trace] 1
+[pattern_trace] 0
